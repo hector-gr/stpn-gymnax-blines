@@ -15,6 +15,10 @@ def main(config, mle_log, log_ext=""):
     # Run the training loop (either evosax ES or PPO)
     if config.train_type == "ES":
         from utils.es import train_es as train_fn
+    elif config.train_type == "PPO" and "STPN" in config.network_name:
+        from utils.ppostpn import train_ppo as train_fn
+    elif config.train_type == "PPO" and "LSTM" in config.network_name:
+        from utils.ppostpn import train_ppo as train_fn
     elif config.train_type == "PPO":
         from utils.ppo import train_ppo as train_fn
     else:
